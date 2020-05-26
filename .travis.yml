@@ -16,3 +16,15 @@ after_success:
   - docker push $DOCKER_ID/fib-nginx
   - docker push $DOCKER_ID/fib-server
   - docker push $DOCKER_ID/fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "checkpoint"
+  env: "Checkpoint-env"
+  bucket_name: "elasticbeanstalk-us-west-2-383299995105"
+  bucket_path: "checkpoint"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

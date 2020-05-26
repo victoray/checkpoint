@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "victoray007/fib-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "victoray007/fib-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "victoray007/fib-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "victoray007/fib-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings":  [
+        {
+          "hostPort":  80,
+          "containerPort": 8080
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
